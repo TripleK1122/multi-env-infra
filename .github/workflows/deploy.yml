@@ -7,13 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  terraform:
-    name: Terraform Validate & Plan
+  terraform-dev:
+    name: Terraform Validate & Plan (DEV)
     runs-on: ubuntu-latest
-
     defaults:
       run:
-        working-directory: ./environments/dev   # Change to ./environments/prod to test prod
+        working-directory: environments/dev  
 
     steps:
       - name: 🧰 Checkout repository
@@ -36,32 +35,9 @@ jobs:
       - name: 🧠 Terraform Plan
         run: terraform plan -no-color
 
-  # Optional — check prod environment
   terraform-prod:
-    name: Terraform Prod Validate
+    name: Terraform Validate & Plan (PROD)
     runs-on: ubuntu-latest
-
     defaults:
       run:
-        working-directory: ./environments/prod
-
-    steps:
-      - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: ⚙️ Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.7.5
-
-      - name: 🔍 Terraform Init
-        run: terraform init
-
-      - name: ✅ Terraform Validate
-        run: terraform validate
-
-      - name: 📋 Terraform Format Check
-        run: terraform fmt -check
-
-      - name: 🧠 Terraform Plan
-        run: terraform plan -no-color
+        working-directory: environments/prod  
