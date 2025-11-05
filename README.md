@@ -16,26 +16,6 @@ Each environment has:
 
 ---
 
-## 🧱 Architecture
-
-multi-env-infra/
-├── modules/
-│ └── webapp/
-│ ├── main.tf # Reusable module for webapp infrastructure
-│ ├── variables.tf # Input variables for flexibility
-│ └── outputs.tf # Outputs (public IP, DNS)
-│
-├── environments/
-│ ├── dev/
-│ │ └── main.tf # Dev environment (small, cost-effective)
-│ └── prod/
-│ └── main.tf # Prod environment (larger, more reliable)
-│
-└── README.md
-
-
----
-
 ## ⚙️ What’s Inside
 
 ### **Module (`modules/webapp`)**
