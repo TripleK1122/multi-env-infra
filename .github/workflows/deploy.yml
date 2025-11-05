@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: environments/dev  
-
+        working-directory: env/dev
     steps:
       - name: 🧰 Checkout repository
         uses: actions/checkout@v4
@@ -41,4 +40,24 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: environments/prod  
+        working-directory: env/prod
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: 🔍 Terraform Init
+        run: terraform init
+
+      - name: ✅ Terraform Validate
+        run: terraform validate
+
+      - name: 📋 Terraform Format Check
+        run: terraform fmt -check
+
+      - name: 🧠 Terraform Plan
+        run: terraform plan -no-color
